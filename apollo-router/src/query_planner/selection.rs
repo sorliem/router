@@ -401,6 +401,164 @@ mod tests {
         );
     }
 
+    #[test]
+    fn test_customer_issue() {
+        let schema = with_supergraph_boilerplate(
+            "type Query { hello: String }
+            type CategoryExperience {
+              categoryId: Int!
+              market: String!
+              status: PossibleProductCategory
+            }
+            union PossibleProductCategory = ProductCategory | UnavailableCategory
+            type ProductCategory {
+              categoryId: Int!
+              brandCatalogId: Int!
+              aisleId: Int!
+              url: String! # @external
+            }
+            type UnavailableCategory {
+              categoryId: Int! # @external
+              target: PossibleTargetForUnavailableCategory # @external
+            }
+            union PossibleTargetForUnavailableCategory = CategoryPageURL | NavigationPath
+            type CategoryPageURL  {
+              categoryId: Int!
+              selectedFilters: [FilterSelection!]
+            }
+            type FilterSelection {
+              filterId: String!
+              optionId: String
+              optionRangeStart: Int
+              optionRangeEnd: Int
+            }
+            type NavigationPath { # @shareable {
+              urlTarget: String! # URL!
+            }",
+        );
+        let schema = Schema::parse_test(&schema, &Default::default()).unwrap();
+
+        let response = bjson!({
+          "__typename": "CategoryExperience",
+          "categoryId": 1780384,
+          "market": "{\"brandCatalogId\":1,\"storeId\":49,\"brand\":\"WF\",\"channel\":\"ECM\",\"country\":\"US\",\"locale\":\"en-US\",\"location\":null,\"segment\":\"B2C\"}",
+          "status": {
+            "__typename": "ProductCategory",
+            "categoryId": 1780384,
+            "brandCatalogId": 1,
+            "aisleId": -1,
+          },
+        });
+
+        let requires = json!([
+          {
+            "kind": "InlineFragment",
+            "typeCondition": "CategoryExperience",
+            "selections": [
+              {
+                "kind": "Field",
+                "name": "__typename"
+              },
+              {
+                "kind": "Field",
+                "name": "status",
+                "selections": [
+                  {
+                    "kind": "InlineFragment",
+                    "typeCondition": "ProductCategory",
+                    "selections": [
+                      {
+                        "kind": "Field",
+                        "name": "__typename"
+                      },
+                      {
+                        "kind": "Field",
+                        "name": "categoryId"
+                      },
+                      {
+                        "kind": "Field",
+                        "name": "brandCatalogId"
+                      },
+                      {
+                        "kind": "Field",
+                        "name": "aisleId"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "InlineFragment",
+                    "typeCondition": "UnavailableCategory",
+                    "selections": [
+                      {
+                        "kind": "Field",
+                        "name": "__typename"
+                      },
+                      {
+                        "kind": "Field",
+                        "name": "categoryId"
+                      },
+                      {
+                        "kind": "Field",
+                        "name": "target",
+                        "selections": [
+                          {
+                            "kind": "InlineFragment",
+                            "typeCondition": "NavigationPath",
+                            "selections": [
+                              {
+                                "kind": "Field",
+                                "name": "__typename"
+                              },
+                              {
+                                "kind": "Field",
+                                "name": "urlTarget"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "kind": "Field",
+                "name": "categoryId"
+              },
+              {
+                "kind": "Field",
+                "name": "market"
+              }
+            ]
+          }
+        ]);
+
+        let selection: Vec<Selection> = serde_json::from_value(requires).unwrap();
+
+        let value = execute_selection_set(&response, &selection, &schema, None);
+        println!(
+            "response\n{}\nand selection\n{:?}\n returns:\n{}",
+            serde_json::to_string_pretty(&response).unwrap(),
+            selection,
+            serde_json::to_string_pretty(&value).unwrap()
+        );
+
+        assert_eq!(
+            value,
+            bjson!({
+                "__typename": "CategoryExperience",
+                "categoryId": 1780384,
+                "market": "{\"brandCatalogId\":1,\"storeId\":49,\"brand\":\"WF\",\"channel\":\"ECM\",\"country\":\"US\",\"locale\":\"en-US\",\"location\":null,\"segment\":\"B2C\"}",
+                "status": {
+                    "__typename": "ProductCategory",
+                    "categoryId": 1780384,
+                    "brandCatalogId": 1,
+                    "aisleId": -1,
+                },
+            })
+        );
+    }
+
     fn with_supergraph_boilerplate(content: &str) -> String {
         format!(
             "{}\n{}",
