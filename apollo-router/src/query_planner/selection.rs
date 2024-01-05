@@ -191,45 +191,27 @@ fn condition_matches(schema: &Schema, current_type: &str, condition: &str) -> bo
 
     match current_type {
         ExtendedType::Object(object_type) => match conditional_type {
-            ExtendedType::Interface(interface_type) => {
-                return object_type
-                    .implements_interfaces
-                    .contains(&interface_type.name)
-            }
-            ExtendedType::Union(union_type) => {
-                return union_type.members.contains(&object_type.name)
-            }
-            ExtendedType::Object(_) => {
-                return object_type.name == condition;
-            }
-            _ => return false,
+            ExtendedType::Interface(interface_type) => object_type
+                .implements_interfaces
+                .contains(&interface_type.name),
+            ExtendedType::Union(union_type) => union_type.members.contains(&object_type.name),
+            ExtendedType::Object(_) => object_type.name == condition,
+            _ => false,
         },
         ExtendedType::Interface(interface_type) => match conditional_type {
-            ExtendedType::Interface(conditional_type) => {
-                return conditional_type
-                    .implements_interfaces
-                    .contains(&interface_type.name)
-            }
-            ExtendedType::Union(union_type) => {
-                return union_type.members.contains(&interface_type.name)
-            }
-            ExtendedType::Object(object_type) => {
-                return interface_type
-                    .implements_interfaces
-                    .contains(&object_type.name)
-            }
-            _ => return false,
+            ExtendedType::Interface(conditional_type) => conditional_type
+                .implements_interfaces
+                .contains(&interface_type.name),
+            ExtendedType::Object(object_type) => interface_type
+                .implements_interfaces
+                .contains(&object_type.name),
+            _ => false,
         },
         ExtendedType::Union(union_type) => match conditional_type {
-            ExtendedType::Interface(interface_type) => {
-                return union_type.members.contains(&interface_type.name)
-            }
-            ExtendedType::Object(object_type) => {
-                return union_type.members.contains(&object_type.name)
-            }
-            _ => return false,
+            ExtendedType::Object(object_type) => union_type.members.contains(&object_type.name),
+            _ => false,
         },
-        _ => return false,
+        _ => false,
     }
 }
 
