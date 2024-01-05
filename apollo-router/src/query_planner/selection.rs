@@ -1,3 +1,4 @@
+use apollo_compiler::schema::ExtendedType;
 use serde::Deserialize;
 use serde::Serialize;
 use serde_json_bytes::ByteString;
@@ -148,7 +149,7 @@ pub(crate) fn execute_selection_set<'a>(
             }) => match type_condition {
                 None => continue,
                 Some(condition) => {
-                    if is_object_of_type(current_type, condition, schema) {
+                    if condition_matches(schema, current_type.unwrap(), condition) {
                         if let Value::Object(selected) =
                             execute_selection_set(input_content, selections, schema, current_type)
                         {
@@ -172,17 +173,13 @@ pub(crate) fn execute_selection_set<'a>(
     Value::Object(output)
 }
 
-fn is_object_of_type(typename: Option<&str>, condition: &str, schema: &Schema) -> bool {
-    let typename = match typename {
-        None => return false,
-        Some(t) => t,
-    };
-
-    if condition == typename {
-        return true;
-    }
-
-    let object_type = match schema.definitions.types.get(typename) {
+/// This is similar to DoesFragmentTypeApply from the GraphQL spec, but the
+/// `current_type` could be an abstract type. So we'll be more flexible in our
+/// tests, checking if the condition is a subtype of the current type, or vice
+/// versa.
+/// <https://spec.graphql.org/October2021/#DoesFragmentTypeApply()>
+fn condition_matches(schema: &Schema, current_type: &str, condition: &str) -> bool {
+    let current_type = match schema.definitions.types.get(current_type) {
         None => return false,
         Some(t) => t,
     };
@@ -192,12 +189,48 @@ fn is_object_of_type(typename: Option<&str>, condition: &str, schema: &Schema) -
         Some(t) => t,
     };
 
-    if conditional_type.is_interface() || conditional_type.is_union() {
-        return (object_type.is_object() || object_type.is_interface())
-            && schema.is_subtype(condition, typename);
+    match current_type {
+        ExtendedType::Object(object_type) => match conditional_type {
+            ExtendedType::Interface(interface_type) => {
+                return object_type
+                    .implements_interfaces
+                    .contains(&interface_type.name)
+            }
+            ExtendedType::Union(union_type) => {
+                return union_type.members.contains(&object_type.name)
+            }
+            ExtendedType::Object(_) => {
+                return object_type.name == condition;
+            }
+            _ => return false,
+        },
+        ExtendedType::Interface(interface_type) => match conditional_type {
+            ExtendedType::Interface(conditional_type) => {
+                return conditional_type
+                    .implements_interfaces
+                    .contains(&interface_type.name)
+            }
+            ExtendedType::Union(union_type) => {
+                return union_type.members.contains(&interface_type.name)
+            }
+            ExtendedType::Object(object_type) => {
+                return interface_type
+                    .implements_interfaces
+                    .contains(&object_type.name)
+            }
+            _ => return false,
+        },
+        ExtendedType::Union(union_type) => match conditional_type {
+            ExtendedType::Interface(interface_type) => {
+                return union_type.members.contains(&interface_type.name)
+            }
+            ExtendedType::Object(object_type) => {
+                return union_type.members.contains(&object_type.name)
+            }
+            _ => return false,
+        },
+        _ => return false,
     }
-
-    false
 }
 
 #[cfg(test)]
