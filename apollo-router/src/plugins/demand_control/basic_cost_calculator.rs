@@ -20,6 +20,7 @@ use super::schema_aware_response::TypedValue;
 use super::CostCalculator;
 use super::DemandControlError;
 use crate::graphql::Response;
+use crate::plugins::demand_control::directives::CostDirective;
 use crate::query_planner::DeferredNode;
 use crate::query_planner::PlanNode;
 use crate::query_planner::Primary;
@@ -70,11 +71,15 @@ impl BasicCostCalculator {
 
         // Determine the cost for this particular field. Scalars are free, non-scalars are not.
         // For fields with selections, add in the cost of the selections as well.
-        let mut type_cost = if ty.is_interface() || ty.is_object() || ty.is_union() {
-            1.0
-        } else {
-            0.0
-        };
+        let mut type_cost =
+            if let Some(CostDirective { weight }) = CostDirective::from_field(field)? {
+                weight
+            } else if ty.is_interface() || ty.is_object() || ty.is_union() {
+                1.0
+            } else {
+                0.0
+            };
+
         type_cost += BasicCostCalculator::score_selection_set(
             &field.selection_set,
             Some(field.ty().inner_named_type()),
