@@ -1,8 +1,7 @@
 use schemars::JsonSchema;
 use serde::Deserialize;
 
-/// Attributes for Http servers
-/// See https://opentelemetry.io/docs/specs/semconv/http/http-spans/#http-server
+/// Attributes for cost telemetry
 #[derive(Deserialize, JsonSchema, Clone, Default, Debug)]
 #[serde(deny_unknown_fields, default)]
 pub(crate) struct CostAttributes {
