@@ -1,0 +1,6 @@
+{
+    ships {
+        id
+        name
+    }
+}

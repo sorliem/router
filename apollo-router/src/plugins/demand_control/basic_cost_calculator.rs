@@ -74,6 +74,7 @@ impl BasicCostCalculator {
         // For fields with selections, add in the cost of the selections as well.
         let mut type_cost =
             if let Some(CostDirective { weight }) = CostDirective::from_field(field)? {
+                tracing::debug!("Field {} has custom cost {}", field.name, weight);
                 weight
             } else if ty.is_interface() || ty.is_object() || ty.is_union() {
                 1.0
@@ -276,13 +277,25 @@ impl BasicCostCalculator {
     fn score_json(value: &TypedValue) -> Result<f64, DemandControlError> {
         match value {
             TypedValue::Null => Ok(0.0),
-            TypedValue::Bool(_, _) => Ok(0.0),
-            TypedValue::Number(_, _) => Ok(0.0),
-            TypedValue::String(_, _) => Ok(0.0),
+            TypedValue::Bool(field, _) => {
+                let cost = CostDirective::from_field(field)?;
+                Ok(cost.map(|c| c.weight).unwrap_or(0.0))
+            }
+            TypedValue::Number(field, _) => {
+                let cost = CostDirective::from_field(field)?;
+                Ok(cost.map(|c| c.weight).unwrap_or(0.0))
+            }
+            TypedValue::String(field, _) => {
+                let cost = CostDirective::from_field(field)?;
+                Ok(cost.map(|c| c.weight).unwrap_or(0.0))
+            }
             TypedValue::Array(_, items) => Self::summed_score_of_values(items),
-            TypedValue::Object(_, children) => {
+            TypedValue::Object(field, children) => {
                 let cost_of_children = Self::summed_score_of_values(children.values())?;
-                Ok(1.0 + cost_of_children)
+                let base_cost = CostDirective::from_field(field)?
+                    .map(|c| c.weight)
+                    .unwrap_or(1.0);
+                Ok(base_cost + cost_of_children)
             }
             TypedValue::Root(children) => Self::summed_score_of_values(children.values()),
         }
@@ -541,5 +554,16 @@ mod tests {
         assert_eq!(estimated_cost(schema, query), 10200.0);
         assert_eq!(planned_cost(schema, query).await, 10400.0);
         assert_eq!(actual_cost(schema, query, response), 2.0);
+    }
+
+    #[test(tokio::test)]
+    async fn federated_query_with_custom_cost() {
+        let schema = include_str!("./fixtures/federated_ships_schema.graphql");
+        let query = include_str!("./fixtures/federated_ships_custom_cost_query.graphql");
+        let response = include_bytes!("./fixtures/federated_ships_custom_cost_response.json");
+
+        assert_eq!(estimated_cost(schema, query), 500.0);
+        assert_eq!(planned_cost(schema, query).await, 500.0);
+        assert_eq!(actual_cost(schema, query, response), 10.0);
     }
 }

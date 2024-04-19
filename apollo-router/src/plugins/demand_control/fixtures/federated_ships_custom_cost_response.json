@@ -1,0 +1,14 @@
+{
+    "data": {
+        "ships": [
+            {
+                "id": 1,
+                "name": "Boaty McBoatface"
+            },
+            {
+                "id": 2,
+                "name": "HMS Grapherson"
+            }
+        ]
+    }
+}
