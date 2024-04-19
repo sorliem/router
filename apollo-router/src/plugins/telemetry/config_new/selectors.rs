@@ -14,6 +14,7 @@ use crate::context::OPERATION_NAME;
 use crate::plugin::serde::deserialize_json_query;
 use crate::plugin::serde::deserialize_jsonpath;
 use crate::plugins::telemetry::config::AttributeValue;
+use crate::plugins::telemetry::config_new::cost::CostValue;
 use crate::plugins::telemetry::config_new::get_baggage;
 use crate::plugins::telemetry::config_new::trace_id;
 use crate::plugins::telemetry::config_new::DatadogId;
@@ -145,7 +146,6 @@ pub(crate) enum RouterSelector {
 }
 
 #[derive(Deserialize, JsonSchema, Clone, Debug)]
-#[cfg_attr(test, derive(Serialize))]
 #[serde(deny_unknown_fields, untagged)]
 pub(crate) enum SupergraphSelector {
     OperationName {
@@ -252,6 +252,12 @@ pub(crate) enum SupergraphSelector {
         default: Option<String>,
     },
     Static(String),
+    /// Cost attributes
+    #[allow(dead_code)]
+    Cost {
+        /// The cost value to select, one of: estimated, actual, delta.
+        cost: CostValue,
+    },
 }
 
 #[derive(Deserialize, JsonSchema, Clone, Derivative)]
@@ -448,6 +454,11 @@ pub(crate) enum SubgraphSelector {
         default: Option<String>,
     },
     Static(String),
+    /// Cost attributes
+    Cost {
+        /// The cost value to select, one of: estimated, actual, delta.
+        cost: CostValue,
+    },
 }
 
 impl Selector for RouterSelector {

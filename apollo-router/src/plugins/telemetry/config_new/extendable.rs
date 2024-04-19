@@ -200,7 +200,6 @@ mod test {
     use schemars::JsonSchema;
     use serde::{Deserialize, Serialize};
 
-    use crate::plugins::telemetry::config_new::attributes::SupergraphAttributes;
     use crate::plugins::telemetry::config_new::extendable::Extendable;
 
     #[derive(Deserialize, Serialize, JsonSchema, Clone, Default, Debug)]

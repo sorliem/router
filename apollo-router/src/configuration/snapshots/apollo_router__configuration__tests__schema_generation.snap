@@ -11345,6 +11345,49 @@ expression: "&schema"
                                   },
                                   {
                                     "type": "string"
+                                  },
+                                  {
+                                    "description": "Cost attributes",
+                                    "type": "object",
+                                    "required": [
+                                      "cost"
+                                    ],
+                                    "properties": {
+                                      "cost": {
+                                        "description": "The cost value to select, one of: estimated, actual, delta.",
+                                        "oneOf": [
+                                          {
+                                            "description": "The estimated cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "estimated"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "actual"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "delta"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                            "type": "string",
+                                            "enum": [
+                                              "result"
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "additionalProperties": false
                                   }
                                 ]
                               }
@@ -12238,6 +12281,49 @@ expression: "&schema"
                                   },
                                   {
                                     "type": "string"
+                                  },
+                                  {
+                                    "description": "Cost attributes",
+                                    "type": "object",
+                                    "required": [
+                                      "cost"
+                                    ],
+                                    "properties": {
+                                      "cost": {
+                                        "description": "The cost value to select, one of: estimated, actual, delta.",
+                                        "oneOf": [
+                                          {
+                                            "description": "The estimated cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "estimated"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "actual"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "delta"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                            "type": "string",
+                                            "enum": [
+                                              "result"
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "additionalProperties": false
                                   }
                                 ]
                               }
@@ -13131,6 +13217,49 @@ expression: "&schema"
                                   },
                                   {
                                     "type": "string"
+                                  },
+                                  {
+                                    "description": "Cost attributes",
+                                    "type": "object",
+                                    "required": [
+                                      "cost"
+                                    ],
+                                    "properties": {
+                                      "cost": {
+                                        "description": "The cost value to select, one of: estimated, actual, delta.",
+                                        "oneOf": [
+                                          {
+                                            "description": "The estimated cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "estimated"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "actual"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "delta"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                            "type": "string",
+                                            "enum": [
+                                              "result"
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "additionalProperties": false
                                   }
                                 ]
                               }
@@ -14020,6 +14149,49 @@ expression: "&schema"
                             },
                             {
                               "type": "string"
+                            },
+                            {
+                              "description": "Cost attributes",
+                              "type": "object",
+                              "required": [
+                                "cost"
+                              ],
+                              "properties": {
+                                "cost": {
+                                  "description": "The cost value to select, one of: estimated, actual, delta.",
+                                  "oneOf": [
+                                    {
+                                      "description": "The estimated cost of the operation using the currently configured cost model",
+                                      "type": "string",
+                                      "enum": [
+                                        "estimated"
+                                      ]
+                                    },
+                                    {
+                                      "description": "The actual cost of the operation using the currently configured cost model",
+                                      "type": "string",
+                                      "enum": [
+                                        "actual"
+                                      ]
+                                    },
+                                    {
+                                      "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                      "type": "string",
+                                      "enum": [
+                                        "delta"
+                                      ]
+                                    },
+                                    {
+                                      "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                      "type": "string",
+                                      "enum": [
+                                        "result"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "additionalProperties": false
                             }
                           ]
                         }
@@ -14938,6 +15110,49 @@ expression: "&schema"
                                         },
                                         {
                                           "type": "string"
+                                        },
+                                        {
+                                          "description": "Cost attributes",
+                                          "type": "object",
+                                          "required": [
+                                            "cost"
+                                          ],
+                                          "properties": {
+                                            "cost": {
+                                              "description": "The cost value to select, one of: estimated, actual, delta.",
+                                              "oneOf": [
+                                                {
+                                                  "description": "The estimated cost of the operation using the currently configured cost model",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "estimated"
+                                                  ]
+                                                },
+                                                {
+                                                  "description": "The actual cost of the operation using the currently configured cost model",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "actual"
+                                                  ]
+                                                },
+                                                {
+                                                  "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "delta"
+                                                  ]
+                                                },
+                                                {
+                                                  "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "result"
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "additionalProperties": false
                                         }
                                       ]
                                     }
@@ -15797,6 +16012,49 @@ expression: "&schema"
                                   },
                                   {
                                     "type": "string"
+                                  },
+                                  {
+                                    "description": "Cost attributes",
+                                    "type": "object",
+                                    "required": [
+                                      "cost"
+                                    ],
+                                    "properties": {
+                                      "cost": {
+                                        "description": "The cost value to select, one of: estimated, actual, delta.",
+                                        "oneOf": [
+                                          {
+                                            "description": "The estimated cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "estimated"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "actual"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "delta"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                            "type": "string",
+                                            "enum": [
+                                              "result"
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "additionalProperties": false
                                   }
                                 ]
                               }
@@ -16742,6 +17000,49 @@ expression: "&schema"
                               },
                               {
                                 "type": "string"
+                              },
+                              {
+                                "description": "Cost attributes",
+                                "type": "object",
+                                "required": [
+                                  "cost"
+                                ],
+                                "properties": {
+                                  "cost": {
+                                    "description": "The cost value to select, one of: estimated, actual, delta.",
+                                    "oneOf": [
+                                      {
+                                        "description": "The estimated cost of the operation using the currently configured cost model",
+                                        "type": "string",
+                                        "enum": [
+                                          "estimated"
+                                        ]
+                                      },
+                                      {
+                                        "description": "The actual cost of the operation using the currently configured cost model",
+                                        "type": "string",
+                                        "enum": [
+                                          "actual"
+                                        ]
+                                      },
+                                      {
+                                        "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                        "type": "string",
+                                        "enum": [
+                                          "delta"
+                                        ]
+                                      },
+                                      {
+                                        "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                        "type": "string",
+                                        "enum": [
+                                          "result"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                },
+                                "additionalProperties": false
                               }
                             ]
                           }
@@ -16753,6 +17054,32 @@ expression: "&schema"
                 "supergraph": {
                   "description": "Supergraph service instruments. For more information see documentation on Router lifecycle.",
                   "type": "object",
+                  "properties": {
+                    "cost.actual": {
+                      "description": "The actual cost of the operation using the currently configured cost model",
+                      "default": null,
+                      "type": "boolean",
+                      "nullable": true
+                    },
+                    "cost.delta": {
+                      "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                      "default": null,
+                      "type": "boolean",
+                      "nullable": true
+                    },
+                    "cost.estimated": {
+                      "description": "The estimated cost of the operation using the currently configured cost model",
+                      "default": null,
+                      "type": "boolean",
+                      "nullable": true
+                    },
+                    "cost.result": {
+                      "description": "The resolution of the cost calculation. This is the error code returned by the cost calculation.",
+                      "default": null,
+                      "type": "boolean",
+                      "nullable": true
+                    }
+                  },
                   "additionalProperties": {
                     "type": "object",
                     "required": [
@@ -16766,6 +17093,30 @@ expression: "&schema"
                         "description": "Attributes to include on the instrument.",
                         "type": "object",
                         "properties": {
+                          "cost.actual": {
+                            "description": "The actual cost of the operation using the currently configured cost model",
+                            "default": null,
+                            "type": "boolean",
+                            "nullable": true
+                          },
+                          "cost.delta": {
+                            "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                            "default": null,
+                            "type": "boolean",
+                            "nullable": true
+                          },
+                          "cost.estimated": {
+                            "description": "The estimated cost of the operation using the currently configured cost model",
+                            "default": null,
+                            "type": "boolean",
+                            "nullable": true
+                          },
+                          "cost.result": {
+                            "description": "The resolution of the cost calculation. This is the error code returned by the cost calculation.",
+                            "default": null,
+                            "type": "boolean",
+                            "nullable": true
+                          },
                           "graphql.document": {
                             "description": "The GraphQL document being executed. Examples: * query findBookById { bookById(id: ?) { name } } Requirement level: Recommended",
                             "default": null,
@@ -17240,6 +17591,49 @@ expression: "&schema"
                             },
                             {
                               "type": "string"
+                            },
+                            {
+                              "description": "Cost attributes",
+                              "type": "object",
+                              "required": [
+                                "cost"
+                              ],
+                              "properties": {
+                                "cost": {
+                                  "description": "The cost value to select, one of: estimated, actual, delta.",
+                                  "oneOf": [
+                                    {
+                                      "description": "The estimated cost of the operation using the currently configured cost model",
+                                      "type": "string",
+                                      "enum": [
+                                        "estimated"
+                                      ]
+                                    },
+                                    {
+                                      "description": "The actual cost of the operation using the currently configured cost model",
+                                      "type": "string",
+                                      "enum": [
+                                        "actual"
+                                      ]
+                                    },
+                                    {
+                                      "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                      "type": "string",
+                                      "enum": [
+                                        "delta"
+                                      ]
+                                    },
+                                    {
+                                      "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                      "type": "string",
+                                      "enum": [
+                                        "result"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              "additionalProperties": false
                             }
                           ]
                         }
@@ -17772,6 +18166,49 @@ expression: "&schema"
                                         },
                                         {
                                           "type": "string"
+                                        },
+                                        {
+                                          "description": "Cost attributes",
+                                          "type": "object",
+                                          "required": [
+                                            "cost"
+                                          ],
+                                          "properties": {
+                                            "cost": {
+                                              "description": "The cost value to select, one of: estimated, actual, delta.",
+                                              "oneOf": [
+                                                {
+                                                  "description": "The estimated cost of the operation using the currently configured cost model",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "estimated"
+                                                  ]
+                                                },
+                                                {
+                                                  "description": "The actual cost of the operation using the currently configured cost model",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "actual"
+                                                  ]
+                                                },
+                                                {
+                                                  "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "delta"
+                                                  ]
+                                                },
+                                                {
+                                                  "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "result"
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "additionalProperties": false
                                         }
                                       ]
                                     }
@@ -18245,6 +18682,49 @@ expression: "&schema"
                                   },
                                   {
                                     "type": "string"
+                                  },
+                                  {
+                                    "description": "Cost attributes",
+                                    "type": "object",
+                                    "required": [
+                                      "cost"
+                                    ],
+                                    "properties": {
+                                      "cost": {
+                                        "description": "The cost value to select, one of: estimated, actual, delta.",
+                                        "oneOf": [
+                                          {
+                                            "description": "The estimated cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "estimated"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "actual"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                            "type": "string",
+                                            "enum": [
+                                              "delta"
+                                            ]
+                                          },
+                                          {
+                                            "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                            "type": "string",
+                                            "enum": [
+                                              "result"
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "additionalProperties": false
                                   }
                                 ]
                               }
@@ -18804,6 +19284,49 @@ expression: "&schema"
                               },
                               {
                                 "type": "string"
+                              },
+                              {
+                                "description": "Cost attributes",
+                                "type": "object",
+                                "required": [
+                                  "cost"
+                                ],
+                                "properties": {
+                                  "cost": {
+                                    "description": "The cost value to select, one of: estimated, actual, delta.",
+                                    "oneOf": [
+                                      {
+                                        "description": "The estimated cost of the operation using the currently configured cost model",
+                                        "type": "string",
+                                        "enum": [
+                                          "estimated"
+                                        ]
+                                      },
+                                      {
+                                        "description": "The actual cost of the operation using the currently configured cost model",
+                                        "type": "string",
+                                        "enum": [
+                                          "actual"
+                                        ]
+                                      },
+                                      {
+                                        "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                        "type": "string",
+                                        "enum": [
+                                          "delta"
+                                        ]
+                                      },
+                                      {
+                                        "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                        "type": "string",
+                                        "enum": [
+                                          "result"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                },
+                                "additionalProperties": false
                               }
                             ]
                           }
@@ -20279,6 +20802,49 @@ expression: "&schema"
                           },
                           {
                             "type": "string"
+                          },
+                          {
+                            "description": "Cost attributes",
+                            "type": "object",
+                            "required": [
+                              "cost"
+                            ],
+                            "properties": {
+                              "cost": {
+                                "description": "The cost value to select, one of: estimated, actual, delta.",
+                                "oneOf": [
+                                  {
+                                    "description": "The estimated cost of the operation using the currently configured cost model",
+                                    "type": "string",
+                                    "enum": [
+                                      "estimated"
+                                    ]
+                                  },
+                                  {
+                                    "description": "The actual cost of the operation using the currently configured cost model",
+                                    "type": "string",
+                                    "enum": [
+                                      "actual"
+                                    ]
+                                  },
+                                  {
+                                    "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                    "type": "string",
+                                    "enum": [
+                                      "delta"
+                                    ]
+                                  },
+                                  {
+                                    "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                    "type": "string",
+                                    "enum": [
+                                      "result"
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "additionalProperties": false
                           }
                         ]
                       }
@@ -20292,16 +20858,32 @@ expression: "&schema"
                   "properties": {
                     "attributes": {
                       "description": "Custom attributes that are attached to the supergraph span.",
-                      "default": {
-                        "attributes": {
-                          "graphql.document": null,
-                          "graphql.operation.name": null,
-                          "graphql.operation.type": null
-                        },
-                        "custom": {}
-                      },
                       "type": "object",
                       "properties": {
+                        "cost.actual": {
+                          "description": "The actual cost of the operation using the currently configured cost model",
+                          "default": null,
+                          "type": "boolean",
+                          "nullable": true
+                        },
+                        "cost.delta": {
+                          "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                          "default": null,
+                          "type": "boolean",
+                          "nullable": true
+                        },
+                        "cost.estimated": {
+                          "description": "The estimated cost of the operation using the currently configured cost model",
+                          "default": null,
+                          "type": "boolean",
+                          "nullable": true
+                        },
+                        "cost.result": {
+                          "description": "The resolution of the cost calculation. This is the error code returned by the cost calculation.",
+                          "default": null,
+                          "type": "boolean",
+                          "nullable": true
+                        },
                         "graphql.document": {
                           "description": "The GraphQL document being executed. Examples: * query findBookById { bookById(id: ?) { name } } Requirement level: Recommended",
                           "default": null,
@@ -20776,6 +21358,49 @@ expression: "&schema"
                           },
                           {
                             "type": "string"
+                          },
+                          {
+                            "description": "Cost attributes",
+                            "type": "object",
+                            "required": [
+                              "cost"
+                            ],
+                            "properties": {
+                              "cost": {
+                                "description": "The cost value to select, one of: estimated, actual, delta.",
+                                "oneOf": [
+                                  {
+                                    "description": "The estimated cost of the operation using the currently configured cost model",
+                                    "type": "string",
+                                    "enum": [
+                                      "estimated"
+                                    ]
+                                  },
+                                  {
+                                    "description": "The actual cost of the operation using the currently configured cost model",
+                                    "type": "string",
+                                    "enum": [
+                                      "actual"
+                                    ]
+                                  },
+                                  {
+                                    "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                    "type": "string",
+                                    "enum": [
+                                      "delta"
+                                    ]
+                                  },
+                                  {
+                                    "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                    "type": "string",
+                                    "enum": [
+                                      "result"
+                                    ]
+                                  }
+                                ]
+                              }
+                            },
+                            "additionalProperties": false
                           }
                         ]
                       }
@@ -23093,6 +23718,49 @@ expression: "&schema"
                       },
                       {
                         "type": "string"
+                      },
+                      {
+                        "description": "Cost attributes",
+                        "type": "object",
+                        "required": [
+                          "cost"
+                        ],
+                        "properties": {
+                          "cost": {
+                            "description": "The cost value to select, one of: estimated, actual, delta.",
+                            "oneOf": [
+                              {
+                                "description": "The estimated cost of the operation using the currently configured cost model",
+                                "type": "string",
+                                "enum": [
+                                  "estimated"
+                                ]
+                              },
+                              {
+                                "description": "The actual cost of the operation using the currently configured cost model",
+                                "type": "string",
+                                "enum": [
+                                  "actual"
+                                ]
+                              },
+                              {
+                                "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                "type": "string",
+                                "enum": [
+                                  "delta"
+                                ]
+                              },
+                              {
+                                "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                "type": "string",
+                                "enum": [
+                                  "result"
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "additionalProperties": false
                       }
                     ]
                   }
@@ -23952,6 +24620,49 @@ expression: "&schema"
                 },
                 {
                   "type": "string"
+                },
+                {
+                  "description": "Cost attributes",
+                  "type": "object",
+                  "required": [
+                    "cost"
+                  ],
+                  "properties": {
+                    "cost": {
+                      "description": "The cost value to select, one of: estimated, actual, delta.",
+                      "oneOf": [
+                        {
+                          "description": "The estimated cost of the operation using the currently configured cost model",
+                          "type": "string",
+                          "enum": [
+                            "estimated"
+                          ]
+                        },
+                        {
+                          "description": "The actual cost of the operation using the currently configured cost model",
+                          "type": "string",
+                          "enum": [
+                            "actual"
+                          ]
+                        },
+                        {
+                          "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                          "type": "string",
+                          "enum": [
+                            "delta"
+                          ]
+                        },
+                        {
+                          "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                          "type": "string",
+                          "enum": [
+                            "result"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
                 }
               ]
             }
@@ -24546,6 +25257,49 @@ expression: "&schema"
                       },
                       {
                         "type": "string"
+                      },
+                      {
+                        "description": "Cost attributes",
+                        "type": "object",
+                        "required": [
+                          "cost"
+                        ],
+                        "properties": {
+                          "cost": {
+                            "description": "The cost value to select, one of: estimated, actual, delta.",
+                            "oneOf": [
+                              {
+                                "description": "The estimated cost of the operation using the currently configured cost model",
+                                "type": "string",
+                                "enum": [
+                                  "estimated"
+                                ]
+                              },
+                              {
+                                "description": "The actual cost of the operation using the currently configured cost model",
+                                "type": "string",
+                                "enum": [
+                                  "actual"
+                                ]
+                              },
+                              {
+                                "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                                "type": "string",
+                                "enum": [
+                                  "delta"
+                                ]
+                              },
+                              {
+                                "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                                "type": "string",
+                                "enum": [
+                                  "result"
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "additionalProperties": false
                       }
                     ]
                   }
@@ -25019,6 +25773,49 @@ expression: "&schema"
                 },
                 {
                   "type": "string"
+                },
+                {
+                  "description": "Cost attributes",
+                  "type": "object",
+                  "required": [
+                    "cost"
+                  ],
+                  "properties": {
+                    "cost": {
+                      "description": "The cost value to select, one of: estimated, actual, delta.",
+                      "oneOf": [
+                        {
+                          "description": "The estimated cost of the operation using the currently configured cost model",
+                          "type": "string",
+                          "enum": [
+                            "estimated"
+                          ]
+                        },
+                        {
+                          "description": "The actual cost of the operation using the currently configured cost model",
+                          "type": "string",
+                          "enum": [
+                            "actual"
+                          ]
+                        },
+                        {
+                          "description": "The delta between the estimated and actual cost of the operation using the currently configured cost model",
+                          "type": "string",
+                          "enum": [
+                            "delta"
+                          ]
+                        },
+                        {
+                          "description": "The result of the cost calculation. This is the error code returned by the cost calculation.",
+                          "type": "string",
+                          "enum": [
+                            "result"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
                 }
               ]
             }
