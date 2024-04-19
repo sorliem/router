@@ -197,17 +197,33 @@ where
 #[cfg(test)]
 mod test {
     use insta::assert_yaml_snapshot;
+    use schemars::JsonSchema;
+    use serde::{Deserialize, Serialize};
 
     use crate::plugins::telemetry::config_new::attributes::SupergraphAttributes;
     use crate::plugins::telemetry::config_new::extendable::Extendable;
-    use crate::plugins::telemetry::config_new::selectors::SupergraphSelector;
+
+    #[derive(Deserialize, Serialize, JsonSchema, Clone, Default, Debug)]
+    #[serde(deny_unknown_fields, default)]
+    pub(crate) struct TestAttributes {
+        #[serde(rename = "graphql.operation.name")]
+        graphql_operation_name: Option<bool>,
+        #[serde(rename = "graphql.operation.type")]
+        graphql_operation_type: Option<bool>,
+    }
+
+    #[derive(Deserialize, Serialize, JsonSchema, Clone, Debug)]
+    #[serde(deny_unknown_fields, untagged)]
+    pub(crate) enum TestSelector {
+        OperationName { operation_name: String },
+    }
 
     #[test]
     fn test_extendable_serde() {
         let mut settings = insta::Settings::clone_current();
         settings.set_sort_maps(true);
         settings.bind(|| {
-            let o = serde_json::from_value::<Extendable<SupergraphAttributes, SupergraphSelector>>(
+            let o = serde_json::from_value::<Extendable<TestAttributes, TestSelector>>(
                 serde_json::json!({
                         "graphql.operation.name": true,
                         "graphql.operation.type": true,
@@ -226,18 +242,16 @@ mod test {
 
     #[test]
     fn test_extendable_serde_fail() {
-        serde_json::from_value::<Extendable<SupergraphAttributes, SupergraphSelector>>(
-            serde_json::json!({
-                    "graphql.operation": true,
-                    "graphql.operation.type": true,
-                    "custom_1": {
-                        "operation_name": "string"
-                    },
-                    "custom_2": {
-                        "operation_name": "string"
-                    }
-            }),
-        )
+        serde_json::from_value::<Extendable<TestAttributes, TestSelector>>(serde_json::json!({
+                "graphql.operation": true,
+                "graphql.operation.type": true,
+                "custom_1": {
+                    "operation_name": "string"
+                },
+                "custom_2": {
+                    "operation_name": "string"
+                }
+        }))
         .expect_err("Should have errored");
     }
 }
